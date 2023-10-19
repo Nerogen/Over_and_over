@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Your API Documentation</title>
+    <!-- Include Bootstrap or other CSS libraries for styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+</head>
+<style>
+    body {
+    background-color: #1A1919; /* Set the background color to dark */
+    color: #fff; /* Set text color to white */
+}
+.container {
+    background-color: #2A2A2A; /* Set container background color to slightly lighter */
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+.json-block {
+    background-color: #000; /* Set JSON block background color to black */
+    display: inline-block;
+    margin-right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+.red-text {
+    color: #F64A60; /* Define the text color as red */
+}
+
+.code-container {
+    background-color: #000000; /* Dark background color */
+    border-radius: 0.375rem; /* Rounded corners */
+    margin-bottom: 1rem;
+    color: #cfcfcf; /* Text color */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333; /* Header background color */
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem; /* Header font size */
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+}
+
+.language {
+    margin-right: 0.5rem;
+}
+
+.copy-button {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: 2px solid #1A1919; /* Use your preferred color code */
+    border-radius: 10px; /* Optional, adds rounded corners */
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+}
+
+.code {
+    padding: 1rem;
+    font-family: 'Courier New', monospace;
+    white-space: pre;
+}
+</style>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="">Welcome to my API service!</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>API Documentation</h1>
+
+            <!-- Link to GitHub Repository -->
+            <p><a href="https://github.com/Nerogen/Over_and_over.git" class="btn btn-primary btn-large">View On GitHub</a></p>
+
+            <!-- API Usage Information -->
+            <h2>API Usage</h2>
+            <p>Here's how to use this API:</p>
+            <ul>
+
+                <li>Make a POST request to retrieve data: <a href="/get_questions/" target="_blank">/get_questions/</a></li>
+                <!-- Add more instructions for your specific API endpoints -->
+            </ul>
+            <h2>Example of a POST request in Python</h2>
+
+            <div class="code-container">
+        <div class="header">
+            <span class="language">Python</span>
+            <button id="copyButton" class="copy-button">
+                Copy code
+            </button>
+        </div>
+
+        <div class="code-container">
+<pre><code class="python" id="codeToCopy">
+import requests
+
+url = 'http://localhost:5000/get_questions/'  # url of api
+data = {'questions_num': 5}  # number of requests
+
+response = requests.post(url, json=data)
+
+if response.status_code == 200:
+    questions = response.json()
+    for question in questions:
+        print(f"Question ID: {question['id']}")
+        print(f"Question Text: {question['question_text']}")
+        print(f"Answer Text: {question['answer_text']}")
+        print(f"Created Date: {question['created_date']}")
+else:
+    print(f"Failed to retrieve questions. Status code: {response.status_code}")
+</code></pre>
+            </div>
+    <script>
+        hljs.highlightAll(); // Apply syntax highlighting to all code blocks
+    </script>
+<script>
+       // Get a reference to the copy button and the code element
+const copyButton = document.getElementById('copyButton');
+const codeToCopy = document.getElementById('codeToCopy');
+
+// Add a click event listener to the copy button
+copyButton.addEventListener('click', function () {
+    // Create a range and select the text within the code element
+    const range = document.createRange();
+    range.selectNode(codeToCopy);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+
+    // Copy the selected text to the clipboard
+    document.execCommand('copy');
+
+    // Deselect the text
+    window.getSelection().removeAllRanges();
+
+    // Notify the user that the code has been copied
+    alert('Code has been copied to the clipboard');
+});
+    </script>
+    </div>
+
+            <!-- Examples of JSON Responses -->
+            <h2>Examples of JSON Responses</h2>
+            <p>Sample JSON responses from API:</p>
+            <div class="code-container">
+            <pre><code class="python">
+[
+  {
+    'id': 12,
+    'question_text': 'You can feel like an 1880s train rider aboard the Durango & Silverton Narrow Gauge Railroad in this state'
+    'answer_text': 'Colorado',
+    'created_date': 'Thu, 19 Oct 2023 15:23:45 GMT',
+  }
+]
+                </code></pre>
+            </div>
+
+             <div class="code-container">
+            <pre><code class="python">
+[
+  {
+    'id': 13,
+    'question_text': '"I\'ve grown accustomed to her looks; accustomed to her voice; accustomed to" this'
+    'answer_text': 'her face',
+    'created_date': 'Thu, 19 Oct 2023 15:28:45 GMT',
+  }
+]
+                </code></pre>
+            </div>
+
+             <div class="code-container">
+            <pre><code class="python">
+[
+  {
+    'id': 14,
+    'question_text': 'He was the first African-American Secretary of State'
+    'answer_text': 'Colin Powell',
+    'created_date': 'Thu, 19 Oct 2023 15:30:01 GMT',
+  }
+]
+                </code></pre>
+            </div>
+            <!-- Add more examples of JSON responses based on your API data structure -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 API Documentation. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+</body>
+</html>
