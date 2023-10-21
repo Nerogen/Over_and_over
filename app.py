@@ -38,7 +38,7 @@ with app.app_context():
 
 # Define a route for the home page
 @app.route('/')
-def index():
+def home_page():
     return render_template('main.html')
 
 
